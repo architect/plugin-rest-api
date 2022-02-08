@@ -1,6 +1,6 @@
 {
   "name": "@architect/plugin-rest-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Architect plugin for deploying legacy API Gateway REST APIs",
   "main": "src/index.js",
   "scripts": {
