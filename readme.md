@@ -13,7 +13,7 @@
 npm i @architect/plugin-rest-api
 ```
 
-Then add make sure your project manifest (usually `app.arc`) has the following two pragmas with (at least) these two settings:
+Then make sure your project manifest (usually `app.arc`) has the following two pragmas with (at least) these two settings:
 
 ```arc
 @aws
