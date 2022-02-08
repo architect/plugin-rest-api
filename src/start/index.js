@@ -6,10 +6,10 @@ let unexpress = require('./un-express-route')
 let forceStatic = require('./add-static-proxy')
 
 module.exports = function legacyAPI (params) {
-  let { cloudformation, inventory, deployStage } = params
+  let { cloudformation, inventory, stage } = params
   let { inv } = inventory
 
-  if (!inv.http?.length || inv.aws.apigateway !== 'rest' || !deployStage) return
+  if (!inv.http?.length || inv.aws.apigateway !== 'rest' || !stage) return
 
   let { arc } = inv._project
   // Copy arc.http to avoid get index mutation
@@ -39,7 +39,7 @@ module.exports = function legacyAPI (params) {
 
   // Base props
   let Type = 'AWS::Serverless::Api'
-  let Properties = getApiProps(http, deployStage)
+  let Properties = getApiProps(http, stage)
   let appname = toLogicalID(arc.app[0])
 
   // Ensure standard CF sections exist
@@ -108,7 +108,7 @@ module.exports = function legacyAPI (params) {
     Description: 'API Gateway (REST)',
     Value: {
       'Fn::Sub': [
-        'https://${ApiId}.execute-api.${AWS::Region}.amazonaws.com/' + deployStage,
+        'https://${ApiId}.execute-api.${AWS::Region}.amazonaws.com/' + stage,
         { ApiId: { Ref: appname } }
       ]
     }
